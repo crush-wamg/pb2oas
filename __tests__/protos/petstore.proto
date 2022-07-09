@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package petstore;
+
+// pet store
+service PetStore {
+  // add pet information
+  rpc newPet (NewPetRequest) returns (Pet);
+
+  // list pet information
+  rpc listPets (ListPetsRequest) returns (ListPetsReply);
+
+  // get pet details
+  rpc getPet (GetPetRequest) returns (Pet);
+
+  // update pet information
+  rpc updatePet (UpdatePetRequest) returns (Pet);
+  
+  // remove pet information
+  rpc deletePet(DeletePetRequest) returns (EmptyReply);
+}
+
+message EmptyReply {}
+
+enum Kind {
+  CAT = 0;
+  DOG = 1;
+  FISH = 2;
+  RABBIT = 3;
+}
+
+enum Sex {
+  MALE = 0;
+  FEMALE = 1;
+}
+
+message Pet {
+  uint32 id = 1; // unique identifier
+  Kind kind = 2;
+  string name = 3;
+  uint32 age = 4;
+  Sex sex = 5;
+}
+
+message NewPetRequest {
+  Kind kind = 1;
+  string name = 2;
+  uint32 age = 3;
+  Sex sex = 4;
+}
+
+message ListPetsRequest {
+  Kind kind = 1;
+  Sex sex = 2;
+  uint32 page = 3 [default=1];
+  uint32 size = 4 [default=100];
+}
+
+message ListPetsReply {
+  uint32 page = 1;
+  uint32 size = 2;
+  uint32 total = 3;
+  repeated Pet pets = 4;
+}
+
+message GetPetRequest {
+  uint32 id = 1;
+}
+
+message UpdatePetRequest {
+  uint32 id = 1;
+  string name = 2;
+  uint32 age = 3;
+}
+
+message DeletePetRequest {
+  uint32 id = 1;
+}

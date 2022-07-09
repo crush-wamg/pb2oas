@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package website;
+
+service Website {
+  rpc getUsers(GetListReq) returns (GetUsersRes);
+
+  rpc getUserType(EmptyReq) returns (GetUseTypeRes);
+
+  rpc getArticles(GetListReq) returns (GetArticlesRes);
+
+  rpc getArticleType(EmptyReq) returns (GetArticleTypeRes);
+}
+
+message GetListReq {
+  uint32 page = 1 [default=1];
+  uint32 size = 2 [default=10];
+}
+
+message EmptyReq {}
+
+message GetUsersRes {
+  uint32 page = 1;
+  uint32 size = 2;
+  uint32 total = 3;
+  message Item {
+    string username = 1;
+    string phoneNumber = 2;
+  }
+  repeated Item items = 4;
+}
+
+message GetArticlesRes {
+  uint32 page = 1;
+  uint32 size = 2;
+  uint32 total = 3;
+  message Item {
+    string title = 1;
+    string author = 2;
+  }
+  repeated Item items = 4;
+}
+
+message GetUseTypeRes {
+  enum Type {
+    NORMAL = 0;
+    ADMIN = 1;
+    SUPER_ADMIN = 2;
+  }
+  repeated Type types = 1;
+}
+
+message GetArticleTypeRes {
+  enum Type {
+    LIFE = 0;
+    TECH = 1;
+    MUSIC = 2;
+  }
+  repeated Type types = 1;
+}
