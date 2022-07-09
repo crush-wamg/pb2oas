@@ -9,7 +9,7 @@ The simply tool to convert .proto to openapi specification.
 ```javascript
 const pb2oas = require('pb2oas')
 
-pb2oas('user.proto', {
+pb2oas('petstore.proto', {
   title: 'Open API Specification',
   servers: [
     {
@@ -35,27 +35,25 @@ pb2oas('user.proto', {
     * **description**: A short description of the API.
     * **servers**: *REQUIRED*. An Array representing Servers.
     * **email**: The email address of the contact person/organization.
-    * **routes**: The http route for the gRPC method. Example: { 'getUserInfo': 'get /users/:id' }
+    * **routes**: The http route for the gRPC method. Example: { 'serviceName.methodName': 'get /path' }
 
 Full example:
 ```javascript
 const pb2oas = require('pb2oas')
 
-pb2oas('user.proto', {
-  keepCase: true,
-  useFilenameAsTagPrefix: true,
+pb2oas('petstore.proto', {
   routes: {
-    newPet: 'post /pet',
-    listPets: 'get /pets',
-    getPet: 'get /pets/:id',
-    updatePet: 'patch /pets/:id',
-    deletePet: 'delete /pets/id',
+    'PetStore.newPet': 'post /pet',
+    'PetStore.listPets': 'get /pets',
+    'PetStore.getPet': 'get /pets/:id',
+    'PetStore.updatePet': 'patch /pets/:id',
+    'PetStore.deletePet': 'delete /pets/id',
   },
-  title: 'Open API Specification',
+  title: 'Pet Store Service APIS',
   servers: [
     {
-      url: "http://localhost:8080/v1",
-      description: 'Development server',
+      url: "http://localhost:8080/api-explorer",
+      description: 'Local server',
     },
   ],
   email: 'support@example.com',
