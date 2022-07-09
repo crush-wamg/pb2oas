@@ -1,0 +1,296 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "WebSite Service APIS",
+    "description": "Some description of server.",
+    "termsOfService": "",
+    "contact": {
+      "email": "support@example.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "",
+    "url": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api-explorer",
+      "description": "Local Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "website.Website",
+      "description": "",
+      "externalDocs": {
+        "description": "",
+        "url": ""
+      }
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": [
+          "website.Website"
+        ],
+        "summary": "",
+        "operationId": "website.Website.getUsers",
+        "parameters": [
+          {
+            "name": "GetListReq",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/website.GetListReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/website.GetUsersRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/type": {
+      "get": {
+        "tags": [
+          "website.Website"
+        ],
+        "summary": "",
+        "operationId": "website.Website.getUserType",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/website.GetUseTypeRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/website.Website/getArticles": {
+      "post": {
+        "tags": [
+          "website.Website"
+        ],
+        "summary": "",
+        "operationId": "website.Website.getArticles",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/website.GetListReq"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/website.GetArticlesRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/website.Website/getArticleType": {
+      "post": {
+        "tags": [
+          "website.Website"
+        ],
+        "summary": "",
+        "operationId": "website.Website.getArticleType",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/website.GetArticleTypeRes"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "website.GetListReq": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int64",
+            "default": 1,
+            "description": ""
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "default": 10,
+            "description": ""
+          }
+        }
+      },
+      "website.GetUsersRes": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          "items": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "$ref": "#/components/schemas/website.GetUsersRes.Item"
+            }
+          }
+        }
+      },
+      "website.GetUsersRes.Item": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": ""
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "website.GetArticlesRes": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64",
+            "description": ""
+          },
+          "items": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "$ref": "#/components/schemas/website.GetArticlesRes.Item"
+            }
+          }
+        }
+      },
+      "website.GetArticlesRes.Item": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": ""
+          },
+          "author": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "website.GetUseTypeRes": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "types": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "$ref": "#/components/schemas/website.GetUseTypeRes.Type"
+            }
+          }
+        }
+      },
+      "website.GetUseTypeRes.Type": {
+        "type": "integer",
+        "format": "int64",
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "description": "definitions\n  * `0` - NORMAL, \n * `1` - ADMIN, \n * `2` - SUPER_ADMIN, "
+      },
+      "website.GetArticleTypeRes": {
+        "type": "object",
+        "description": "",
+        "properties": {
+          "types": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "$ref": "#/components/schemas/website.GetArticleTypeRes.Type"
+            }
+          }
+        }
+      },
+      "website.GetArticleTypeRes.Type": {
+        "type": "integer",
+        "format": "int64",
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "description": "definitions\n  * `0` - LIFE, \n * `1` - TECH, \n * `2` - MUSIC, "
+      }
+    }
+  }
+}
