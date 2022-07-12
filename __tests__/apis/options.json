@@ -184,12 +184,12 @@
             "type": "array",
             "description": "",
             "items": {
-              "$ref": "#/components/schemas/website.GetUsersRes.Item"
+              "$ref": "#/components/schemas/user.User"
             }
           }
         }
       },
-      "website.GetUsersRes.Item": {
+      "user.User": {
         "type": "object",
         "description": "",
         "properties": {
